@@ -245,7 +245,7 @@ export class HomeComponent implements OnInit {
         var dayIndex = formatItems.indexOf("dd");
         var yearIndex = formatItems.indexOf("yyyy");
         
-        var month = parseInt(dateItems[monthIndex]);
+        var month = parseInt(dateItems[monthIndex]) - 1;
         var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
         
         return formatedDate;
