@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import './app/app.component.css';
+
+/* fix for toolbar */
+.mat-toolbar-layout {display: flex !important;}
+.bottom-pagination .mat-toolbar-row, .action-bar .mat-toolbar-row, .mat-toolbar {height: auto !important; min-height: 0 !important;}

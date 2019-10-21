@@ -1,0 +1,131 @@
+<mat-paginator *ngIf="top_pagination"
+	[length]="total"
+	[pageSize]="per_page"
+	[pageSizeOptions]="page_size"
+	(page)="switchPage($event)">
+</mat-paginator>
+<div class="table-list">
+<mat-table #table [dataSource]="dataSource" *ngIf="displayedColumns">
+
+	<!--- Note that these columns can be defined in any order.
+	  The actual rendered columns are set as a property on the row definition" -->
+	<ng-container *ngFor="let col of columns" [matColumnDef]="col.name" [ngSwitch]="col.type">
+		<div *ngSwitchCase="'check'">
+			<mat-header-cell *matHeaderCellDef>
+				<mat-checkbox
+					(change)="$event ? masterToggle() : null;  runAction(col.action, item, $event);"
+					[checked]="selection.hasValue() && isAllSelected()"
+					[indeterminate]="selection.hasValue() && !isAllSelected()">
+				</mat-checkbox>
+			</mat-header-cell>
+			<mat-cell *matCellDef="let item">
+				<mat-checkbox  
+					(click)="$event.stopPropagation(); runAction(col.action, item, $event);"
+					(change)="$event ? selection.toggle(item) : null"
+					[checked]="selection.isSelected(item)">
+				</mat-checkbox>
+			</mat-cell>
+		</div>
+		<div *ngSwitchCase="'actions'">
+			<mat-header-cell class="col.name" *matHeaderCellDef [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> Actions </mat-header-cell>
+			<mat-cell *matCellDef="let item" [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> 
+				<a *ngFor="let action of col.actions" mat-icon-button (click)="runAction(action.action, item)" title="{{ action.name }}">
+					<mat-icon>{{ action.icon }}</mat-icon>
+				</a>
+			</mat-cell>
+		</div>
+		<div *ngSwitchCase="'dropdown'">
+			<mat-header-cell class="col.name" *matHeaderCellDef [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1,'text-align':'left'}"> {{ col.header }} </mat-header-cell>
+			<mat-cell *matCellDef="let item" [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1,'text-align':'left'}">
+				<mat-form-field style="width: 95%;">
+					<mat-select [(ngModel)]="item[col.value_name]" (ngModelChange)="runAction(col.action, item)">
+						<mat-option *ngFor="let listItem of col.drop_down_list" value="{{ listItem.value }}">{{ listItem.name }}</mat-option>
+					</mat-select>
+				</mat-form-field>
+			</mat-cell>
+		</div>
+		<div *ngSwitchCase="'autocomplete'">
+			<mat-header-cell class="col.name" *matHeaderCellDef [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> {{ col.header }} </mat-header-cell>
+			<mat-cell *matCellDef="let item" [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}">
+				<mat-form-field style="width: 95%;">
+					 <input matInput
+					 		type="text"
+							[(ngModel)]="item[col.value_name]"
+							(ngModelChange)="runAction(col.action, item)"
+							[matAutocomplete]="auto"
+							(focus)="focus(col.focus, item, $event)"
+							(focusout)="focus(col.focusout, item, $event)">
+					    <mat-autocomplete #auto="matAutocomplete" class="{{ col.name }}">
+					      <mat-option *ngFor="let listItem of (item.drop_down || col.drop_down_list) | filter:item[col.value_name]:['value']" value="{{ listItem.value }}">
+					        {{ listItem.name }}
+					      </mat-option>
+					    </mat-autocomplete>
+				</mat-form-field>
+			</mat-cell>
+		</div>
+		<div *ngSwitchCase="'textbox'">
+			<mat-header-cell class="col.name" *matHeaderCellDef [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> {{ col.header }} </mat-header-cell>
+			<mat-cell *matCellDef="let item" [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> 
+				<mat-form-field style="width: 95%;">
+					<input matInput
+						[(ngModel)]="item[col.value_name]"
+						type="{{col.content_type}}"
+						min="{{ col.min || col.min === 0? col.min: '' }}"
+						max="{{ col.max || col.max === 0? col.max: '' }}"
+						(ngModelChange)="runAction(col.action, item)"
+						(focus)="focus(col.focus, item, $event)"
+						(focusout)="focus(col.focusout, item, $event)">
+				</mat-form-field>
+			</mat-cell>
+		</div>
+		<div *ngSwitchCase="'textarea'">
+			<mat-header-cell *matHeaderCellDef [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> {{ col.header }} </mat-header-cell>
+			<mat-cell *matCellDef="let item" [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> 
+				<mat-form-field style="width: 95%;">
+					<textarea matInput
+							[(ngModel)]="item[col.value_name]"
+							(ngModelChange)="runAction(col.action, item)"
+							(keyup)="runAction(col.action, item, $event)"
+							(focus)="focus(col.focus, item, $event)"
+							(focusout)="focus(col.focusout, item, $event)"></textarea>
+				</mat-form-field>
+			</mat-cell>
+		</div>
+		<div *ngSwitchCase="'date'">
+			<mat-header-cell *matHeaderCellDef [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> {{ col.header }} </mat-header-cell>
+			<mat-cell *matCellDef="let item" [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> 
+				<mat-form-field style="width: 95%;">
+					<input matInput [matDatepicker]="picker" [(ngModel)]="item[col.value_name]" (keyup)="runAction(col.action, item, $event)" (dateChange)="runAction(col.action, item, $event)">
+					<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+					<mat-datepicker #picker></mat-datepicker>
+				</mat-form-field>
+			</mat-cell>
+		</div>
+		<div *ngSwitchCase="'url'">
+			<mat-header-cell *matHeaderCellDef [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> {{ col.header }} </mat-header-cell>
+			<mat-cell *matCellDef="let item" [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1}"> 
+				<a href="col.href" (click)="runAction(col.action, item, $event)">{{ item[col.value_name] }}%</a>
+			</mat-cell>
+		</div>
+		<div *ngSwitchDefault>
+			<mat-header-cell *matHeaderCellDef [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1, 'text-align': 'left'}"> {{ col.header }} </mat-header-cell>
+			<mat-cell *matCellDef="let item" [ngStyle]="{'flex': col.width? '0 0 ' + col.width: 1, 'text-align': 'left'}" (click)="runAction(col.action, item)">
+				<p *ngIf="isArray(item[col.value_name])"> 
+					 <span *ngFor="let itemValue of item[col.value_name]">{{itemValue}}<br></span>
+				</p>
+				<p *ngIf="!isArray(item[col.value_name])">{{ item[col.value_name] }}</p>
+			</mat-cell>
+		</div>
+	</ng-container>
+
+	<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+	<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator 
+	[length]="total"
+	[pageSize]="per_page"
+	[pageSizeOptions]="page_size"
+	(page)="switchPage($event)">
+</mat-paginator>
+
+</div>

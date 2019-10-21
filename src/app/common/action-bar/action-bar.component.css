@@ -1,0 +1,52 @@
+.action-bar-components {
+    /*max-height: 35px;*/
+    display: flex;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    margin-bottom: -20px;
+    background: white;
+}
+
+.action-bar-components label {
+    align-self: center;
+    margin-right: 5px;
+}
+
+.action-bar-components label:not(:first-child) {
+    margin-left: 10px;
+}
+
+.action-bar-components input[type="text"] {
+    width: 400px;
+    height: 34px;
+}
+
+.action-bar-components select {
+    height: 35px;
+}
+
+.action-bar-components select,
+.action-bar-components input[type="text"] {
+    max-width: 270px;
+    padding: 0 7px;
+    background-color: #fff;
+    border-radius: 2px;
+    border: 1px solid #d7d6d9;
+    color: #34313f;
+    outline: none;
+    z-index: 1;
+}
+.action-bar-components input[type="text"]::placeholder {
+    color: #aaa;
+}
+
+#orderStatusSelect,
+.clearSearch {
+  margin-left: 5px;
+}
+
+.create-btn {
+    height: 34px;
+    margin-right: 5px;
+}

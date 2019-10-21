@@ -1,0 +1,39 @@
+<div class="page-container">
+		<div class="app-header">
+			<img src="./assets/images/logo-full-black.svg" style="float: right;">
+			<h1 class="noselect">Payroll Reports Manager</h1>
+		</div>
+		<mat-tab-group #tabGroup dynamicHeight="true" (selectedTabChange)="tabChanged($event)">
+			<mat-tab label="New Report">
+				<div class="upload-section" *ngIf="!showReport">
+					<div class="upload-section-details">
+						<p>Upload New Report</p>
+	
+						<input hidden type="file" #uploader (change)="uploadFile($event)" />
+	
+						<button mat-raised-button color="primary" class="upload-button" (click)="uploader.click()">
+							Upload
+						</button>
+					</div>
+				</div>
+				<div class="report-list" *ngIf="showReport">
+					<div class="report-operation">
+						<button mat-raised-button color="primary" class="save-button" (click)="saveReport()">Save Report</button>
+						<button mat-raised-button color="white" class="save-button" (click)="cancelReport()">Cancel</button>
+					</div>
+					<div class="mat-elevation-z2">
+						<table-list [columns]="columns" [data]="report"></table-list>
+					</div>
+				</div>
+			</mat-tab>
+	
+			<mat-tab label="View Reports">
+				<div class="report-list">
+					<view-reports [bulkOptions]="bulkOptions" ></view-reports>
+				</div>
+	
+			</mat-tab>
+		</mat-tab-group>
+	</div>
+	
+	<img class="gw-logo" src="./assets/images/gw_logo.png">

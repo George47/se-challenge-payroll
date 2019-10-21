@@ -1,0 +1,12 @@
+<h2 class="header">Apply a percentage discount</h2>
+<div>
+	<mat-form-field class="percent-box">
+		<input id="adjust" type="number" min="0" max="100" [(ngModel)]="adjustValue" matInput placeholder="PERCENT">
+	</mat-form-field>
+</div>
+<div>
+	<mat-checkbox [(ngModel)]="data.product.isApplyAll">apply to all line items/serial numbers</mat-checkbox>
+</div>
+<div class="btn-container" mat-dialog-actions>
+  <button class="apply-btn" (click)="updateAdjust()"[mat-dialog-close]="product" mat-raised-button cdkFocusInitial>APPLY DISCOUNT TO RATE</button>
+</div>

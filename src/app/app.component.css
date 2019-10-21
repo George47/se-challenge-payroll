@@ -1,0 +1,46 @@
+@import './common/input/checkbox/checkbox.component.css';
+
+.app {background-color: #f6f7f9;  margin:0!important;}
+* {
+  /* font-weight: bold; */
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+.app h1 {
+    color: #34313f;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.3334;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+button:hover, .save-button:hover, .upload-button:hover {
+  color: #FFF;
+  background-color: #0095ff;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px 8px;
+  background: #fff;
+  color: #4b71fc;
+  border-radius: 2px;
+  border: 1px solid #b7c6fe;
+  text-decoration: none;
+  letter-spacing: 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #4b71fc;
+  color: #fff;
+  margin: 0 8px 0 0;
+  text-decoration: none;
+  padding: 7px 17px 6px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  font-size: 14px;
+}
+

@@ -1,0 +1,78 @@
+mat-table,
+mat-header-cell,
+mat-cell,
+mat-paginator {
+	background: transparent;
+}
+
+mat-header {
+	min-height: unset;
+	height: 35px;
+}
+
+mat-row:hover {
+	background: white;
+}
+
+mat-row {
+	min-height: unset;
+	height: 30px;
+}
+
+mat-row.expandable {
+	height: unset;
+}
+
+.element-row {
+  position: relative;
+}
+
+.element-row.expanded {
+  border-bottom-color: transparent;
+}
+
+.create-card-section {
+    background: white;
+}
+
+.create-card-section .content,
+.create-card-section .content .address .row,
+.create-card-section .content .card .row {
+	display: flex;
+}
+
+.create-card-section .content .address {
+	margin: 0 15px 15px 15px;
+	border-right: 1px black solid;
+}
+
+.create-card-section .content .card {
+	margin: 0 0 15px 0;
+}
+
+
+.create-card-section .content .card,
+.create-card-section .content .address,
+.create-card-section .content .address .row .col {
+	flex: 1;
+}
+
+.create-card-section .content .address .row .col,
+.create-card-section .content .card .row .col {
+	margin-right: 15px;
+}
+
+.buttons {
+    float: right;
+	color: white;
+	margin-right: 15px;
+}
+
+.remove-btn {
+    background: black;
+}
+
+.add-btn {
+    background: green;
+}
+

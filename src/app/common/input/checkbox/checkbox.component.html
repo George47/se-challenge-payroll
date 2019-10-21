@@ -1,0 +1,6 @@
+<div class="checkbox-container" (click)="changeCheck()">
+    <div class="checkbox-checked" [hidden]="!check">
+        <!-- <mat-icon>check</mat-icon> -->
+        <input type="checkbox" [(ngModel)]="check" style="display:none;">
+    </div>
+</div>

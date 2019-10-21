@@ -1,0 +1,16 @@
+.notification-message {
+    h2 {
+        margin:0;
+    }
+    p {
+        max-width: 330px;
+    }
+    .actions {
+        display: flex;
+        justify-content: space-around;
+        button {
+            border-radius: 0;
+            border: 1px solid #000 !important;
+        }
+    }
+}

@@ -1,0 +1,68 @@
+<div *ngIf="dbConnected">
+	<action-bar
+		(bulkOptionChange)="updateBulk($event)"
+		(filterItems)="filterItems($event)">
+	</action-bar>
+	<div class="mat-elevation-z2">
+		<mat-table #table [dataSource]="dataSource" *ngIf="displayedColumns">
+		<ng-container *ngFor="let col of columns" [matColumnDef]="col.name" [ngSwitch]="col.type">
+			<div *ngSwitchCase="'check'">
+				<mat-header-cell *matHeaderCellDef>
+					<mat-checkbox  
+						(change)="$event ? masterToggle() : null"
+						[checked]="selection.hasValue() && isAllSelected()"
+						[indeterminate]="selection.hasValue() && !isAllSelected()">
+					</mat-checkbox>
+				</mat-header-cell>
+				<mat-cell *matCellDef="let item">
+					<mat-checkbox  
+						(click)="$event.stopPropagation()"
+						(change)="$event ? selection.toggle(item) : null"
+						[checked]="selection.isSelected(item)">
+					</mat-checkbox>
+				</mat-cell>
+			</div>
+			<div *ngSwitchCase="'actions'">
+				<mat-header-cell *matHeaderCellDef></mat-header-cell>
+				<mat-cell *matCellDef="let item"> 
+					<ng-container *ngFor="let action of col.actions">
+						<a *ngIf="item.show && item.show !== action.action" mat-icon-button (click)="runAction(action.action, item)">
+							<mat-icon>{{ action.icon }}</mat-icon>
+						</a>
+					</ng-container>
+				</mat-cell>
+			</div>
+			<div *ngSwitchCase="'text'">
+				<mat-header-cell *matHeaderCellDef> {{ col.header }} </mat-header-cell>
+				<mat-cell *matCellDef="let item"> {{ item[col.value_name] }} </mat-cell>
+			</div>
+		</ng-container>
+		<ng-container matColumnDef="expandedDetail">
+			<mat-cell *matCellDef="let item">
+				<view-reports-detail
+					*ngIf="item.expand.show"
+					[report]="item.expand"
+					(hideRow)="toggleRow($event)">
+				</view-reports-detail>
+
+			</mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;"
+				matRipple
+				class="element-row" ></mat-row>
+
+		<mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+				[@detailExpand]="row.expand.show ? 'expanded' : 'collapsed'"
+				style="overflow: hidden"
+				class="expandable"> 
+		</mat-row>
+	</mat-table>
+
+	</div>
+</div>
+
+<div *ngIf="!dbConnected">
+	<h3>Database connection cannot be established!</h3>
+</div>

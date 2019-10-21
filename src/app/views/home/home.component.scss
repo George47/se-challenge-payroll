@@ -1,0 +1,78 @@
+.noselect {
+	-webkit-touch-callout: none; /* iOS Safari */
+	  -webkit-user-select: none; /* Safari */
+	   -khtml-user-select: none; /* Konqueror HTML */
+		 -moz-user-select: none; /* Old versions of Firefox */
+		  -ms-user-select: none; /* Internet Explorer/Edge */
+			  user-select: none; /* Non-prefixed version, currently
+									supported by Chrome, Opera and Firefox */
+  }
+
+.mat-tab-group, .mat-button-wrapper {
+	font-family: 'Montserrat', Arial, sans-serif;
+}
+
+
+.app-header {
+	background: linear-gradient(135deg, #136acd 0%, #5E3791 100%);
+	box-shadow:         1px 1px 2px 3px #ccc;
+	// height: 100px;
+
+	h1 {
+		padding:3rem;
+		color:white;
+		margin-block-start: 0em !important;
+		font-weight: bold;
+		// height:
+	}
+
+	img {
+		padding:3rem;
+		filter: brightness(0) invert(1);
+
+	}
+}
+
+.page-container {
+	min-width: 1000px;
+}
+
+
+.report-list {
+	margin-left: 30px;
+	margin: 2rem 5rem 0 5rem;
+	.report-operation {
+		margin-bottom: 2rem;
+	}
+}
+
+.upload-section {
+	margin: 0 auto;
+	width: 50%;
+	margin-top: 5rem;
+	background-color: white;
+	height: 270px;
+
+	.upload-section-details {
+		font-size: 20px;
+		font-weight: bold;
+		padding: 5rem;
+		width: 50%;
+		margin: 0 auto;
+		text-align: center;
+		.upload-button {
+			margin-top: 1rem;
+			position: inherit;
+		}
+	}	
+}
+
+.gw-logo {
+	filter: opacity(50%) invert(0.3);
+	position: fixed;
+    bottom: 2rem;
+	right: 2.5rem;
+	width: 50px;
+	height:auto; 
+	z-index: 99999;
+}

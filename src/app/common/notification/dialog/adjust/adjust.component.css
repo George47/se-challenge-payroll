@@ -1,0 +1,18 @@
+.header {
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
+.percent-box {
+	width: 100%;
+	text-align: center;
+}
+
+.btn-container {
+	text-align: center;
+    display: block;
+    flex-wrap: unset;
+    margin-bottom: unset;
+    padding: unset;
+    margin-top: 15px;
+}

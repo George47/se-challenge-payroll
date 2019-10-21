@@ -1,0 +1,22 @@
+<div style="padding: 0 10px 0 10px; background-color: white;">
+
+	<form [formGroup]="selectorGroup" style="display: inline">
+		<mat-form-field style="width: 56px;">
+			<mat-select style="width: 56px;" value="5" formControlName="selector"> 
+				<mat-option *ngFor="let elemPerPage of pageSizeOptions" value="{{ elemPerPage }}">
+					{{ elemPerPage }} 
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</form>
+
+	<div style="padding: 0 20px 0 20px; display: inline;">{{ getRangeLabel(pageIndex, pageSize, length) }}</div>
+
+	<mat-icon style="max-height: 10px;" (click)="previousPage()" [style.color]="getArrowColor('left')" [style.cursor]="getCursorStyle('left')">
+		arrow_back_ios
+	</mat-icon>
+
+	<mat-icon style="max-height: 10px;" (click)="nextPage()" [style.color]="getArrowColor('right')" [style.cursor]="getCursorStyle('right')">
+		arrow_forward_ios
+	</mat-icon>
+</div>
