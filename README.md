@@ -1,6 +1,6 @@
 # Payroll Reports Manager - George Wang
 
-This application is made for the payroll challenge from Wave.
+This application is made for the payroll challenge from Wave. Interface is developed using Angular, server side handling is using Express + MySQL.
 
 # Features
 + Upload new report from CSV file
