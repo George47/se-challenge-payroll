@@ -6,7 +6,7 @@ This application is made for the payroll challenge from Wave.
 + Upload new report from CSV file
 + View past uploaded CSV files
 
-#Usage
+# Usage
 
 App can be accessed directly from `./dist/index.html`
 
