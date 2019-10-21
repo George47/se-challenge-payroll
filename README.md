@@ -1,4 +1,4 @@
-#Payroll Reports Manager - George Wang
+# Payroll Reports Manager - George Wang
 
 This application is made for the payroll challenge from Wave.
 
