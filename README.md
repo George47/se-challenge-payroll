@@ -1,3 +1,42 @@
+#Payroll Reports Manager - George Wang
+
+This application is made for the payroll challenge from Wave.
+
+# Features
++ Upload new report from CSV file
++ View past uploaded CSV files
+
+#Usage
+
+App can be accessed directly from `./dist/index.html`
+
+### Setup  Database Connection
+                
+1. Import database structure from `./db/wave.sql`
+
+2. Setup database connection by changing `./api/config.js`
+3. If port is different, change it in `./dist/index.html` :
+```javascript
+<script>
+	var port = "5000";
+	var report_api_endpoint = `http://localhost:${port}/api/v1/reports`;
+</script>
+```
+
+4. Run `$npm start` under `./api`
+                
+
+# Perks
++ Great UI and UX design
++ Fast algorithm execution
++ Throughout great table structure
+
+# Concerns
++ Mobile usage
++ CSV parsing
+
+---
+
 # Wave Software Development Challenge
 
 Applicants for the Full-stack Developer role at Wave must
