@@ -23,7 +23,7 @@ App can be accessed directly from `./dist/index.html`
 </script>
 ```
 
-4. Run `$npm start` under `./api`
+4. Run `$npm install` and `$npm start` under `./api`
                 
 
 # Perks
